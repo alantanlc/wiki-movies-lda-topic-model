@@ -4,6 +4,6 @@ import pycorpora
 movies = pycorpora.film_tv.popular_movies['popular-movies']
 
 # Split entries into title and year
-movies = [m[:-1].split(' (') for m in movies ]
+movies = [m[:-1].split(' (') for m in movies]
 
-print('Hello World!')
+print('Program completed!')
