@@ -1,6 +1,5 @@
-import json
 import pycorpora
-import requests
+import wikipedia
 
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
@@ -35,16 +34,14 @@ for m in movies:
 	try:
 		# Get accurate wiki title of movie to perform wiki query
 		wikiTitle = browser.find_element_by_class_name('mw-category-group').find_element_by_xpath(xpath).get_attribute('title') # Search for mw-category-group to be more precise
-		query = 'https://en.wikipedia.org/w/api.php?action=query&format=json&prop=revisions&rvprop=content&titles=' + wikiTitle
 
 		# Extract wiki content of movie
-		response = requests.get(query)
-		data = response.json()
+		page = wikipedia.page(wikiTitle)
 
 		# Write wiki content to json file
-		fileName = 'movies-wiki-content/' + m[0] + '.json'
-		with open(fileName, 'w') as f:
-			f.writelines(json.dumps(data, indent=4))
+		fileName = 'movies-wiki-content/' + m[0] + '.txt'
+		with open(fileName, 'w', encoding='utf-8') as f:
+			f.writelines(page.content)
 			print('\tExtraction successful and content written to ' + fileName + '!')
 	except:
 		unsuccessfulMovies.append(m)
