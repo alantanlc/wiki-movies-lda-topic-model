@@ -39,13 +39,13 @@ for m in movies:
 		page = wikipedia.page(wikiTitle)
 
 		# Write wiki content to json file
-		fileName = 'movies-wiki-content/' + m[0] + '.txt'
+		fileName = './data/raw/' + str(m[0]).replace(':', '') + '.txt'
 		with open(fileName, 'w', encoding='utf-8') as f:
 			f.writelines(page.content)
 			print('\tExtraction successful and content written to ' + fileName + '!')
-	except:
+	except Exception as e:
 		unsuccessfulMovies.append(m)
-		print('\tExtraction failed!')
+		print('\tExtraction failed! ' + e)
 
 # Print unsuccessful movies
 print(str(unsuccessfulMovies))
