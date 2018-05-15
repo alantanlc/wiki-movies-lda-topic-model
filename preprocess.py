@@ -1,4 +1,5 @@
 import os
+import re
 
 # Directories
 raw_dir = './data/raw/'
@@ -16,12 +17,16 @@ for file_name in os.listdir(raw_dir):
 			with open(raw_path, 'r', encoding='utf-8') as f:
 				content = f.read()
 
+			# Remove punctuation and multiple spaces using regular expression
+			content = re.sub(r'[^\w\s]', ' ', content)
+			content = ' '.join(content.split())
+
 			# Extract words
 			words = content.split(' ')
 
 			# Perform preprocessing
 			# Remove punctuation, stop list, symbols...
-			words = [word.strip() + '\n' for word in words]
+			words = [word + '\n' for word in words]
 
 			# Write processed data to file
 			with open(preprocess_path, 'w', encoding='utf-8') as f:
@@ -29,5 +34,5 @@ for file_name in os.listdir(raw_dir):
 				print('\tPreprocessing completed and written to ' + preprocess_path)
 
 		except Exception as e:
-			print('\tPreprocess failed! ' + e)
+			print('\tPreprocess failed! ' + str(e))
 

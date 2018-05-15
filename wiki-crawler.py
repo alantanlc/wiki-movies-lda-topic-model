@@ -45,7 +45,7 @@ for m in movies:
 			print('\tExtraction successful and content written to ' + fileName + '!')
 	except Exception as e:
 		unsuccessfulMovies.append(m)
-		print('\tExtraction failed! ' + e)
+		print('\tExtraction failed! ' + str(e))
 
 # Print unsuccessful movies
 print(str(unsuccessfulMovies))
