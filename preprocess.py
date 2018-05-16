@@ -42,7 +42,7 @@ for file_name in os.listdir(raw_dir):
 			with open(preprocess_path, 'w', encoding='utf-8') as f:
 				f.writelines(words)
 				print('\tPreprocessing completed and written to ' + preprocess_path)
-			with open('./data/lda/words.txt', 'a', encoding='utf-8') as f:
+			with open('./data/wordids/wordids.txt', 'a', encoding='utf-8') as f:
 				f.writelines(words)
 
 		except Exception as e:
